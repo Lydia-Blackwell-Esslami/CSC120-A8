@@ -6,6 +6,7 @@ public class House extends Building implements HouseRequirements {
 
   private ArrayList<Student> residents;
   private boolean hasDiningRoom;
+  private boolean hasElevator;
 
   /**
    * Constructor for the house
@@ -14,11 +15,12 @@ public class House extends Building implements HouseRequirements {
    * @param nFloors How many floors are in the house
    * @param hasDiningRoom Wether or not the house has a dining room
    */
-  public House(String name, String address, int nFloors, boolean hasDiningRoom) {
+  public House(String name, String address, int nFloors, boolean hasDiningRoom, boolean hasElevator) {
     super(name, address, nFloors);
     System.out.println("You have built a house: 🏠");
     this.hasDiningRoom = hasDiningRoom;
     this.residents = new ArrayList<Student>();
+    this.hasElevator = hasElevator;
   }
 
   /**
@@ -54,12 +56,17 @@ public class House extends Building implements HouseRequirements {
     return this.residents.contains(s);
   }
 
+  public void showOptions() {
+    System.out.println("Available options at " + this.name + ":\n + enter() \n + exit() \n + goUp() \n + goDown()\n + goToFloor(n)\n + moveIn()\n + moveOut()");
+}
+
 
   public static void main(String[] args) {
     Student bob = new Student("Bob", "990", 2029);
-    House myHouse = new House("Myhouse", "16th St.", 2, false);
+    House myHouse = new House("Myhouse", "16th St.", 2, false, false);
     myHouse.residents.add(bob);
     System.out.println(myHouse);
+    myHouse.showOptions();
   }
 
 }
