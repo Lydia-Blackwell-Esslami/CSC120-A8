@@ -1,5 +1,5 @@
 /* This is a stub for the Cafe class */
-public class Cafe extends Building implements CafeRequirements{
+public class Cafe extends Building{
 
     private int nCoffeeOunces; // The number of ounces of coffee remaining in inventory
     private int nSugarPackets; // The number of sugar packets remaining in inventory
@@ -13,6 +13,14 @@ public class Cafe extends Building implements CafeRequirements{
         this.nSugarPackets = nSugarPackets;
         this.nCreams = nCreams;
         this.nCups = nCups;
+    }
+
+    public Cafe(){
+        super();
+        this.nCoffeeOunces = 0;
+        this.nSugarPackets = 0;
+        this.nCreams = 0;
+        this.nCups = 0;
     }
     
     
@@ -39,10 +47,34 @@ public class Cafe extends Building implements CafeRequirements{
         this.nCups += nCups; 
     }
 
+    private void restock(){
+        this.nCoffeeOunces += 20;
+        this.nSugarPackets += 20;
+        this.nCreams += 20;
+        this.nCups += 20; 
+    }
+
     public String toString(){
         return (this.name + " is a " + this.nFloors + "-story cafe located at " + this.address + 
         ". The current state of the inventory is: " + this.nCoffeeOunces + "oz of coffee, " + this.nSugarPackets + 
         " packets of sugar, " + this.nCreams + "tsps of cream, " + this.nCups + " cups. ");
+    }
+
+    public void showOptions(){
+        super.showOptions();
+        System.out.println(" + sellCoffee() \n + restock()");
+    }
+
+    public void goToFloor(int floorNum){
+        throw new RuntimeException("This floor is not available to customers");
+    }
+
+    public void goUp(){
+        throw new RuntimeException("The roof is not acessible to customers");
+    }
+
+    public void goDown(){
+        throw new RuntimeException("The basement is not acessible to customers");
     }
 
     public static void main(String[] args) {
@@ -52,6 +84,7 @@ public class Cafe extends Building implements CafeRequirements{
         System.out.println(myCafe);
         myCafe.sellCoffee(30, 10, 7);
         System.out.println(myCafe);
+        myCafe.showOptions();
     }
     
 }

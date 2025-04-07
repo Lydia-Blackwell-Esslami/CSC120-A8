@@ -4,13 +4,18 @@ import java.util.Hashtable;
 
 
 /* This is a stub for the Library class */
-public class Library extends Building implements LibraryRequirements{
+public class Library extends Building{
 
   private Hashtable<String, Boolean> collection;
 
   public Library(String name, String address, int nFloors) {
     super(name, address, nFloors);
     System.out.println("You have built a library: 📖"); 
+    collection = new Hashtable<String, Boolean>();
+  }
+
+  public Library(){
+    super();
     collection = new Hashtable<String, Boolean>();
   }
 
@@ -46,6 +51,19 @@ public class Library extends Building implements LibraryRequirements{
     }
     );
   }
+
+  public void showOptions(){
+    super.showOptions();
+    System.out.println(" + addTitle(title) \n + removeTitle(title) \n + checkOut(title) \n + returnBook(title) \n + containsTitle(title) \n + isAvailable(title) \n + printCollection()");
+  }
+
+  public void goToFloor(){
+    if (this.activeFloor != -1){
+      this.activeFloor = 1;
+    } else {
+      throw new RuntimeException("You MUST enter the building first!");
+    }
+  }
   
 
   public static void main(String[] args) {
@@ -58,6 +76,7 @@ public class Library extends Building implements LibraryRequirements{
     myLib.checkOut("A");
     myLib.removeTitle("B");
     myLib.printCollection();
+    myLib.showOptions();
   }
 
 }

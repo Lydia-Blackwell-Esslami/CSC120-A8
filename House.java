@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 /* This is a stub for the House class */
-public class House extends Building implements HouseRequirements {
+public class House extends Building {
 
 
   private ArrayList<Student> residents;
@@ -21,6 +21,16 @@ public class House extends Building implements HouseRequirements {
     this.hasDiningRoom = hasDiningRoom;
     this.residents = new ArrayList<Student>();
     this.hasElevator = hasElevator;
+  }
+
+   //overloaded constuctor for the house
+  public House(){
+    this.name = "Unknown";
+    this.address = "Unknown";
+    this.nFloors = 0;
+    this.hasDiningRoom = false;
+    this.hasElevator = false;
+    this.residents = new ArrayList<Student>();
   }
 
   /**
@@ -57,16 +67,36 @@ public class House extends Building implements HouseRequirements {
   }
 
   public void showOptions() {
-    System.out.println("Available options at " + this.name + ":\n + enter() \n + exit() \n + goUp() \n + goDown()\n + goToFloor(n)\n + moveIn()\n + moveOut()");
-}
+    super.showOptions();
+    System.out.println(" + moveIn(s)\n + moveOut(s)");
+  }
+
+  public void goToFloor(int floorNum){
+    if (hasElevator){
+      super.goToFloor(floorNum);
+    } else {
+      throw new RuntimeException("This house does not have an elevator. You must prceed through floors in a linear fashion.");
+    }
+  }
+
+  public void goToFloor(){
+    if (this.activeFloor != -1){
+      System.out.println("Okay but where do you want to go?");
+    } else {
+      throw new RuntimeException("You MUST enter the building first!");
+    }
+  }
+
+
 
 
   public static void main(String[] args) {
     Student bob = new Student("Bob", "990", 2029);
-    House myHouse = new House("Myhouse", "16th St.", 2, false, false);
+    House myHouse = new House("Myhouse", "16th St.", 4, false, false);
     myHouse.residents.add(bob);
     System.out.println(myHouse);
     myHouse.showOptions();
+    myHouse.exit();
   }
 
 }
